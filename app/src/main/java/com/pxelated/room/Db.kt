@@ -9,5 +9,5 @@ import android.arch.persistence.room.RoomDatabase
 
 @Database(entities = arrayOf(Person::class), version = 1)
 abstract class Db: RoomDatabase() {
-    abstract fun personDao: PersonDao
+    abstract fun personDao(): PersonDao
 }
