@@ -1,6 +1,7 @@
 package com.pxelated.room
 
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import io.reactivex.Flowable
 
@@ -12,4 +13,7 @@ import io.reactivex.Flowable
 interface PersonDao {
     @Query("SELECT * FROM person")
     fun getPeople(): Flowable<List<Person>>
+
+    @Insert
+    fun add(person: Person)
 }
