@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey
  * Created by nano on 5/21/17.
  */
 
-@Entity
+@Entity(tableName = "people")
 data class Person(
         @PrimaryKey(autoGenerate = true)
         val uid: Long,

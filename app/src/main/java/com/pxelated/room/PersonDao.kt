@@ -11,7 +11,7 @@ import io.reactivex.Flowable
 
 @Dao
 interface PersonDao {
-    @Query("SELECT * FROM person")
+    @Query("SELECT * FROM people")
     fun getPeople(): Flowable<List<Person>>
 
     @Insert
