@@ -5,6 +5,8 @@ import android.os.Bundle
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.internal.operators.flowable.FlowableBlockingSubscribe.subscribe
+import io.reactivex.internal.operators.flowable.FlowableReplay.observeOn
 import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        listenForPeople()
         addPerson("Fernando", "Paredes")
     }
 
@@ -24,5 +27,15 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
+    }
+
+    fun listenForPeople() {
+        App.database?.personDao()?.getPeople()
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe { people ->
+                println("Got People: $people")
+            }
+
     }
 }
